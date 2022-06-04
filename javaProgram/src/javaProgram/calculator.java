@@ -33,7 +33,9 @@ public class calculator extends JFrame {
       JPanel panel = new JPanel();
       panel.setLayout(new GridLayout(4, 4));
       JLabel status = new JLabel("계산기 입니다.");
-      for (int i = 0; i < 10; i++) {
+      
+      
+      for (int i = 7; i < 10; i++) {
          JButton btn = new JButton("" + i);
          btn.addActionListener(e-> {
             if(display.getText().equals("0")) {
@@ -46,14 +48,26 @@ public class calculator extends JFrame {
          panel.add(btn);
       }
       
-      JButton btnEqual = new JButton("=");
-      btnEqual.addActionListener(e->{
-         op2 = Double.parseDouble(display.getText());
-         double result = calc(op1, op2, operator);
-         display.setText(""+ result);
-         status.setText(String.valueOf(op1 + "+" + op2));
+      JButton btnmultiply = new JButton("×");
+      btnmultiply.addActionListener(e->{
+         op1 = Double.parseDouble(display.getText());
+         display.setText("0");
+         operator = "×";
       });
-      panel.add(btnEqual);
+      panel.add(btnmultiply);
+      
+      for (int i = 4; i < 7; i++) {
+          JButton btn = new JButton("" + i);
+          btn.addActionListener(e-> {
+             if(display.getText().equals("0")) {
+                display.setText(btn.getText());
+             }
+             else {
+                display.setText(display.getText() + btn.getText());
+             }
+          });
+          panel.add(btn);
+       }
       
       JButton btnPlus = new JButton("+");
       btnPlus.addActionListener(e->{
@@ -64,6 +78,19 @@ public class calculator extends JFrame {
       });
       panel.add(btnPlus);
       
+      for (int i = 1; i < 4; i++) {
+          JButton btn = new JButton("" + i);
+          btn.addActionListener(e-> {
+             if(display.getText().equals("0")) {
+                display.setText(btn.getText());
+             }
+             else {
+                display.setText(display.getText() + btn.getText());
+             }
+          });
+          panel.add(btn);
+       }
+      
       JButton btnMinus = new JButton("-");
       btnMinus.addActionListener(e->{
          op1 = Double.parseDouble(display.getText());
@@ -72,21 +99,27 @@ public class calculator extends JFrame {
       });
       panel.add(btnMinus);
      
-      JButton btndivison = new JButton("/");
+      JButton btndivison = new JButton("÷");
       btndivison.addActionListener(e->{
          op1 = Double.parseDouble(display.getText());
          display.setText("0");
-         operator = "/";
+         operator = "÷";
       });
       panel.add(btndivison);
       
-      JButton btnmultiply = new JButton("*");
-      btnmultiply.addActionListener(e->{
-         op1 = Double.parseDouble(display.getText());
-         display.setText("0");
-         operator = "*";
-      });
-      panel.add(btnmultiply);
+      for (int i = 0; i < 1; i++) {
+          JButton btn = new JButton("" + i);
+          btn.addActionListener(e-> {
+             if(display.getText().equals("0")) {
+                display.setText(btn.getText());
+             }
+             else {
+                display.setText(display.getText() + btn.getText());
+             }
+          });
+          panel.add(btn);
+      }
+      
       
       JButton btnDot = new JButton(".");
       btnDot.addActionListener(e->{
@@ -96,6 +129,16 @@ public class calculator extends JFrame {
       });
       panel.add(btnDot);
       
+      
+      
+      JButton btnEqual = new JButton("=");
+      btnEqual.addActionListener(e->{
+         op2 = Double.parseDouble(display.getText());
+         double result = calc(op1, op2, operator);
+         display.setText(""+ result);
+         status.setText(String.valueOf(op1 + operator + op2));
+      });
+      panel.add(btnEqual);
       this.add(panel);
    
       
@@ -114,10 +157,10 @@ public class calculator extends JFrame {
       case "-":
          result = op1 - op2;
          break;
-      case "*":
+      case "×":
          result = op1 * op2;
          break;
-      case "/":
+      case "÷":
          result = op1 / op2;
          break;
       }
